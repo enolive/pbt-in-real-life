@@ -2,12 +2,10 @@
 # You can also start simply with 'default'
 theme: enolive
 # some information about your slides (markdown enabled)
-title: Property Based Testing IRL
+title: Property-Based Testing IRL
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## Property-Based Testing IRL
+  ...not only for mathematicians!
 # slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/features/mdc

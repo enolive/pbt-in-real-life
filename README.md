@@ -1,11 +1,13 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Presentation about Property-Based Testing
 
-To start the slide show:
+This session is about sharing my experiences working with PBT for many years in real projects.
 
-- `pnpm install`
-- `pnpm dev`
+Visit [GH Pages](https://enolive.github.io/pbt-in-real-life/) to see
+this presentation in action.
+
+## To start the slide show:
+
+- `npm install`
+- `npm dev`
 - visit <http://localhost:3030>
 
-Edit the [slides.md](./slides.md) to see the changes.
-
-Learn more about Slidev at the [documentation](https://sli.dev/).
