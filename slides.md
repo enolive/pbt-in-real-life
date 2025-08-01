@@ -73,7 +73,7 @@ class: fade
 
 ::left::
 
-```kotlin 
+```kotlin {all|2|all}
 [property]
 it("numbers divisible by 3 produce a Fizz") {
   checkAll(Arb.int().filter { it % 3 == 0 }) { input ->
@@ -111,9 +111,10 @@ class: fade
 
 <v-clicks>
 
-- numbers divisible by 5 produce a Fizz
+- numbers divisible by 5 produce Buzz
 - result is never empty
 - pattern repeats every 15 numbers
+- every sequence of 3 numbers contains a Fizz
 - function works for any possible number
 
 </v-clicks>
@@ -124,13 +125,13 @@ image: /stop.png
 class: fade
 ---
 
-# What is Property testing **not**?
+# What is Property-Based testing **not**?
 
 <v-clicks>
 
 - replacement for Example Testing
 - exhaustive testing
-- prove your code is correct
+- proof that code is correct
 - only for mathematicians
 - only for complicated algorithms
 
@@ -161,16 +162,16 @@ class: text-4xl fade
 
 <v-clicks>
 
-- each property test is executed many times
+- each property test is executed many times (usually 100 iterations)
 - on failure
-- try to find a simpler example
+- try to find a simpler example, via [Shrinking](https://kotest.io/docs/proptest/property-test-shrinking.html)
 - display used seed to deterministically reproduce the error
 
 </v-clicks>
 
 ---
 
-# Can you guess the error?
+# Can you spot the error?
 
 ```kotlin {all|2,4}
 it("upper cased version of any string has the same length") {
@@ -447,7 +448,7 @@ it("numbers") {
 
 <v-click>
 
-```
+```log
 Statistics: [numbers] (1000 iterations, 1 args) 
 
 ODD                                                           502 (50%)
