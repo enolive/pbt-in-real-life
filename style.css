@@ -1,0 +1,7 @@
+.loose-list ul {
+  @apply list-none;
+
+  li {
+    @apply ml-0 line-height-loose;
+  }
+}
