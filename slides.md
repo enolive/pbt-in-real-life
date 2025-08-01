@@ -576,6 +576,12 @@ val listOfRandomCats = arbCat.take(100).toList()
 </v-click>
 
 ---
+layout: cover
+---
+
+# Conclusion
+
+---
 class: text-2xl fade
 ---
 
@@ -650,9 +656,10 @@ class: text-2xl
 - <mdi-youtube/> [Property-Based Testing with jqwik in Java and Kotlin by Johannes Link](https://www.youtube.com/watch?v=dPhZIo27fYE)
 - <mdi-youtube/> [Property-Based Testing for everyone by Romeu Moura](https://www.youtube.com/watch?v=5pwv3cuo3Qk)
 - <mdi-blog/> [Johannes Link's Blog Posts about PBT (not only in Java)](https://blog.johanneslink.net/tags/#property-based-testing)
-- <mdi-blog/> [comparison between kotest and jqwik from 2022 by me](https://www.welcz.de/blog/2022/05/09/jqwik-at-first-glance-from-a-kotest-users-perspective/)
+- <mdi-blog/> [Comparison between Kotest and Jqwik from 2022 by me](https://www.welcz.de/blog/2022/05/09/jqwik-at-first-glance-from-a-kotest-users-perspective/)
 - <mdi-slideshow/> [Property-Based Testing in .NET by Patrick Drechsler](https://draptik.github.io/2025-07-socrates-de-property-based-testing)
-- <mdi-github/> [color picker in TS using fastcheck by me](https://github.com/enolive/color-picker/)
+- <mdi-github/> [Color Picker in TS using Fast Check and Vitest by me](https://github.com/enolive/color-picker/)
+- <mdi-github/> [Mars Rover kata in Haskell using QuickCheck by me](https://github.com/enolive/haskell-mob/blob/solution/mars-rover/test/MarsRoverSpec.hs)
 
 ---
 src: ./thanks.md
