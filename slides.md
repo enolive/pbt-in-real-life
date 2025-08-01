@@ -103,11 +103,11 @@ it("numbers divisible by 3 produce a Fizz") {
 
 ---
 layout: image-right
-image: /research.png
+image: /research3.png
 class: fade
 ---
 
-# Some other properties
+# More properties
 
 <v-clicks>
 
