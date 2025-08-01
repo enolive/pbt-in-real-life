@@ -534,7 +534,9 @@ layout: cover
 # Real life tips
 
 ---
+layout: image-right
 class: fade text-2xl
+image: /tips.png
 ---
 
 <v-clicks>
@@ -623,6 +625,9 @@ class: fade
 
 </v-clicks>
 
+---
+layout: image-right
+image: /pbt-frameworks.png
 ---
 
 # PBT Frameworks
