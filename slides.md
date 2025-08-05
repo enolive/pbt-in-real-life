@@ -73,8 +73,7 @@ class: fade
 
 ::left::
 
-```kotlin {all|2|all}
-[property]
+```kotlin [property] {all|2,6}
 it("numbers divisible by 3 produce a Fizz") {
   checkAll(Arb.int().filter { it % 3 == 0 }) { input ->
     val result = fizzBuzz(input)
@@ -246,11 +245,11 @@ val constant = Arb.constant(42)
 
 val arbNumber = Arb.int()
 
+val arbNumberPositive = Arb.int(min = 0)
+
 val arbStatus = Arb.enum<Status>()
 // to my knowledge, kotest is the only PBT framework having exhaustive generators
 val exStatus = Exhaustive.enum<Status>()
-
-val arbNumberPositive = Arb.int(min = 0)
 
 val arbString = Arb.string()
 
@@ -285,7 +284,7 @@ val arbUniqueNames = arbNames.map { it.distinct() }
 val arbAge = Arb.int(0..100)
 val arbName = Arb.string()
 
-val person = arbAge.flatMap { 
+val arbPerson = arbAge.flatMap { 
   age -> arbName.map { 
     name -> Person(name, age)
   }
