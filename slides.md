@@ -323,7 +323,7 @@ val arbPerson = arbitrary {
 
 <v-click>
 
-...Arbitraries are monads 😜
+...Arbitraries are [monads](https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) 😜
 
 </v-click>
 
