@@ -358,7 +358,7 @@ checkAll(distinctDates) { (first, second) ->
 class: fade loose-list
 ---
 
-# Better use assumptions
+# Favor assumptions
 
 
 ```kotlin [assumption]
