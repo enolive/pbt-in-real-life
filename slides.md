@@ -54,7 +54,7 @@ it("generates fizz") {
 - lots of duplication
 - requires lots of testing discipline
 - you will most probably miss edge cases
-- duplication solvable with parameterizing the test
+- duplication solvable by parameterizing the test
 
 </v-clicks>
 
@@ -73,9 +73,10 @@ class: fade
 
 ::left::
 
-```kotlin [property] {all|2,6}
+```kotlin [property] {all|3,7|2|all}
 it("numbers divisible by 3 produce a Fizz") {
-  checkAll(Arb.int().filter { it % 3 == 0 }) { input ->
+  val numbersDivisibleBy3 = Arb.int().filter { it % 3 == 0 }
+  checkAll(numbersDivisibleBy3) { input ->
     val result = fizzBuzz(input)
   
     result shouldContain "Fizz"
@@ -124,13 +125,13 @@ image: /stop.png
 class: fade
 ---
 
-# What is Property-Based testing **not**?
+# What is Property-Based Testing **not**?
 
 <v-clicks>
 
 - replacement for Example Testing
-- exhaustive testing
-- proof that code is correct
+- exhaustive
+- proof of code correctness
 - only for mathematicians
 - only for complicated algorithms
 
@@ -156,15 +157,16 @@ layout: cover
 # How it works
 
 ---
-class: text-4xl fade
+class: text-3xl fade
 ---
 
 <v-clicks>
 
-- each property test is executed many times (usually 100 iterations)
+- each property executed many times with random-ish data
 - on failure
+- display used input
 - try to find a simpler example, via [Shrinking](https://kotest.io/docs/proptest/property-test-shrinking.html)
-- display used seed to deterministically reproduce the error
+- display deterministic seed for reproduction
 
 </v-clicks>
 
@@ -269,9 +271,11 @@ val arbList = Arb.list(0..100, Arb.double())
 
 map works like on lists
 
-```kotlin
+```kotlin {1-2|4|all}
 val arbNames = Arb.list(0..100, Arb.string())
 val arbUniqueNames = arbNames.map { it.distinct() }
+
+val arbNumbersThatMightBeDivisibleBy3 = Arb.int().map { it * 3 }
 ```
 
 </v-click>
@@ -336,7 +340,7 @@ class: text-2xl fade
 <v-clicks>
 
 - filter like on lists
-- filter harder to read
+- complex filters hard to read
 - can starve on too many discarded samples
 
 </v-clicks>
@@ -369,8 +373,9 @@ checkAll(Arb.localDate(), Arb.localDate()) { first, second ->
 ```
 <v-clicks>
 
-- ⚠️ fail on discard percentage (default usually 10..20%)!
+- ⚠️ fail on discard percentage (eg. 10%)!
 - ⚠️ not all frameworks support assumptions 😭
+- 🤔 assumption on single arbitrary?
 
 </v-clicks>
 
@@ -602,6 +607,12 @@ https://blog.johanneslink.net/2018/07/16/patterns-to-find-properties/
 
 </v-click>
 
+<style>
+  li {
+    @apply text-3xl line-height-relaxed;
+  }
+</style>
+
 ---
 layout: fact
 ---
@@ -615,7 +626,7 @@ p {
 </style>
 
 ---
-class: fade
+class: text-3xl fade
 ---
 
 # When not to use PBT?
