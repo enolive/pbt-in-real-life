@@ -73,7 +73,7 @@ class: fade
 
 ::left::
 
-```kotlin [property] {all|3,7|2|all}
+```kotlin [property] {all|3,7|2}
 it("numbers divisible by 3 produce a Fizz") {
   val numbersDivisibleBy3 = Arb.int().filter { it % 3 == 0 }
   checkAll(numbersDivisibleBy3) { input ->
@@ -269,9 +269,7 @@ val arbList = Arb.list(0..100, Arb.double())
 
 <v-click>
 
-map works like on lists
-
-```kotlin {1-2|4|all}
+```kotlin [map like on lists] {1-2|4}
 val arbNames = Arb.list(0..100, Arb.string())
 val arbUniqueNames = arbNames.map { it.distinct() }
 
@@ -282,9 +280,7 @@ val arbNumbersThatMightBeDivisibleBy3 = Arb.int().map { it * 3 }
 
 <v-click>
 
-...flatMap as well
-
-```kotlin
+```kotlin [flatMap]
 val arbAge = Arb.int(0..100)
 val arbName = Arb.string()
 
@@ -337,26 +333,22 @@ class: text-2xl fade
 
 # Filtering
 
-<v-clicks>
+```kotlin [filter] {1|3-}
+val numbersDivisibleBy3 = Arb.int().filter { it % 3 == 0 }
 
-- filter like on lists
-- complex filters hard to read
-- can starve on too many discarded samples
-
-</v-clicks>
-
-<v-click>
-
-```kotlin [filter]
 // you can only filter on one arbitrary!
 // therefore we combine two into one to be able to filter some values
 val distinctDates = Arb.pair(Arb.localDate(), Arb.localDate())
   .filter { (x, y) -> x != y }
-checkAll(distinctDates) { (first, second) ->
-  ...
-}
 ```
-</v-click>
+
+<v-clicks>
+
+- works like on lists
+- complex filters hard to read
+- can starve on too many discarded samples
+
+</v-clicks>
 
 ---
 class: fade loose-list
