@@ -6,14 +6,10 @@ title: Property-Based Testing IRL
 info: |
   ## Property-Based Testing IRL
   ...not only for mathematicians!
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
-# enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
 # open graph
 seoMeta:
-  # By default, Slidev will use ./og-image.png if it exists,
-  # or generate one from the first slide if not found.
   ogImage: auto
 src: ./intro.md
 ---
@@ -58,12 +54,6 @@ it("generates fizz") {
 
 </v-clicks>
 
-<style>
-.slidev-layout {
-  @apply gap-x-4xl;
-}
-</style>
-
 ---
 layout: two-cols-header
 class: fade
@@ -94,12 +84,6 @@ it("numbers divisible by 3 produce a Fizz") {
 - ... without duplicating the implementation 😉
 
 </v-clicks>
-
-<style>
-.slidev-layout {
-  @apply gap-x-4xl;
-}
-</style>
 
 ---
 layout: image-right
