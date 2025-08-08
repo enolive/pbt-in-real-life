@@ -73,7 +73,7 @@ class: fade
 
 ::left::
 
-```kotlin [property] {all|3,7|2}
+```kotlin [property] {all|3,7|2|all}
 it("numbers divisible by 3 produce a Fizz") {
   val numbersDivisibleBy3 = Arb.int().filter { it % 3 == 0 }
   checkAll(numbersDivisibleBy3) { input ->
@@ -139,16 +139,11 @@ class: fade
 
 ---
 layout: fact
-class: fade
 ---
-
-<v-clicks>
 
 - Tests are **hypotheses** about the correctness of the code.
 - Therefore, they **cannot be proven**, only **falsified**.
 - Finding a good, **falsifiable** hypothesis is the hard thing!
-
-</v-clicks>
 
 ---
 layout: cover
@@ -269,7 +264,7 @@ val arbList = Arb.list(0..100, Arb.double())
 
 <v-click>
 
-```kotlin [map like on lists] {1-2|4}
+```kotlin [map like on lists] {1-2|4|all}
 val arbNames = Arb.list(0..100, Arb.string())
 val arbUniqueNames = arbNames.map { it.distinct() }
 
@@ -328,7 +323,7 @@ val arbPerson = arbitrary {
 </v-click>
 
 ---
-class: text-2xl fade
+class: text-2xl
 ---
 
 # Filtering
@@ -342,16 +337,16 @@ val distinctDates = Arb.pair(Arb.localDate(), Arb.localDate())
   .filter { (x, y) -> x != y }
 ```
 
-<v-clicks>
+<v-click>
 
 - works like on lists
 - complex filters hard to read
 - can starve on too many discarded samples
 
-</v-clicks>
+</v-click>
 
 ---
-class: fade loose-list
+class: loose-list
 ---
 
 # Favor assumptions
@@ -363,16 +358,16 @@ checkAll(Arb.localDate(), Arb.localDate()) { first, second ->
   ...
 }
 ```
-<v-clicks>
+<v-click>
 
 - ⚠️ fail on discard percentage (eg. 10%)!
 - ⚠️ not all frameworks support assumptions 😭
 - 🤔 assumption on single arbitrary?
 
-</v-clicks>
+</v-click>
 
 ---
-class: loose-list fade
+class: loose-list
 ---
 
 # Reflection
@@ -382,12 +377,12 @@ class: loose-list fade
 val arbPerson = Arb.bind<Person>()
 ```
 
-<v-clicks>
+<v-click>
 
 - ⚠️ limited support between languages & ecosystems
 - ⚠️ slow, especially in lists
 
-</v-clicks>
+</v-click>
 
 ---
 
@@ -466,62 +461,46 @@ layout: cover
 # Real life examples
 
 ---
-class: text-2xl loose-list fade
+class: text-2xl loose-list
 ---
 
 # Username to Color
-
-<v-clicks>
 
 - 💡 get a deterministic color for each user
 - 💡 for company branding out of a palette
 - 💣 nasty modulo operation failure for negative hash values
 
-</v-clicks>
-
 ---
-class: text-2xl loose-list fade
+class: text-2xl loose-list
 ---
 
 # EWMA
-
-<v-clicks>
 
 - 💡 exponentially weighted moving average
 - 💡 more recent values are weighted higher than older ones
 - 💡 used to calculate the probable value of a forcasted payment
 - 💣 sum to Infinity bug in the function!
 
-</v-clicks>
-
 ---
-class: text-2xl loose-list fade
+class: text-2xl loose-list
 ---
 
 # Generating recurring payments
-
-<v-clicks>
 
 - 💡 user can create planned payments
 - 💡 specify a period, start and optional end
 - 💣 off-by-one error when stars align
 
-</v-clicks>
-
 ---
-class: text-2xl loose-list fade
+class: text-2xl loose-list
 ---
 
 # Calculating work days
-
-<v-clicks>
 
 - 💡 given two dates, how many real work days are there?
 - 💡 excluding weekends and German holidays
 - 💡 using fixed dates and the [Gauss' Easter Algorithm](https://en.wikipedia.org/wiki/Date_of_Easter#Gauss's_Easter_algorithm)
 - 💣 detected the whole thing was too slow to be feasible
-
-</v-clicks>
 
 ---
 layout: cover
