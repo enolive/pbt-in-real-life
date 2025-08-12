@@ -221,7 +221,7 @@ class: fade
 
 # Primitives
 
-```kotlin
+```kotlin {1-5|all}
 val constant = Arb.constant(42)
 
 val arbNumber = Arb.int()
@@ -246,16 +246,12 @@ val arbList = Arb.list(0..100, Arb.double())
 
 # Map & FlatMap
 
-<v-click>
-
 ```kotlin [map like on lists] {1-2|4|all}
 val arbNames = Arb.list(0..100, Arb.string())
 val arbUniqueNames = arbNames.map { it.distinct() }
 
 val arbNumbersThatMightBeDivisibleBy3 = Arb.int().map { it * 3 }
 ```
-
-</v-click>
 
 <v-click>
 
