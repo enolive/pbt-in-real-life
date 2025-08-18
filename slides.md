@@ -326,25 +326,26 @@ val distinctDates = Arb.pair(Arb.localDate(), Arb.localDate())
 </v-click>
 
 ---
-class: loose-list
+class: loose-list text-2xl
 ---
 
-# Favor assumptions
+# Favor preconditions
 
 
-```kotlin [assumption]
+```kotlin [precondition]
 checkAll(Arb.localDate(), Arb.localDate()) { first, second ->
   assume(first != second)
   ...
 }
 ```
-<v-click>
+<v-clicks>
 
-- ⚠️ fail on discard percentage (eg. 10%)!
-- ⚠️ not all frameworks support assumptions 😭
-- 🤔 assumption on single arbitrary?
+- ⚠️ fail on discard ratio (eg. 10%)!
+- ⚠️ not supported by all frameworks 😭
+- ⚠️ inconsistent naming (pre, discard, assume)
+- 🤔 use on single arbitrary?
 
-</v-click>
+</v-clicks>
 
 ---
 class: loose-list
