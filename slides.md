@@ -340,8 +340,8 @@ checkAll(Arb.localDate(), Arb.localDate()) { first, second ->
 ```
 <v-clicks>
 
-- ⚠️ fail on discard ratio (eg. 10%)!
-- ⚠️ not supported by all frameworks 😭
+- ✅ supported by most frameworks
+- ✅ fail on discard ratio (eg. 10%)!
 - ⚠️ inconsistent naming (pre, discard, assume)
 - 🤔 use on single arbitrary?
 
