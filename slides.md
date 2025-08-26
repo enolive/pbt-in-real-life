@@ -244,7 +244,7 @@ val arbList = Arb.list(0..100, Arb.double())
 
 ---
 
-# Map & FlatMap
+# Map
 
 ```kotlin [map like on lists] {1-2|4|all}
 val arbNames = Arb.list(0..100, Arb.string())
@@ -253,7 +253,9 @@ val arbUniqueNames = arbNames.map { it.distinct() }
 val arbNumbersThatMightBeDivisibleBy3 = Arb.int().map { it * 3 }
 ```
 
-<v-click>
+---
+
+# FlatMap
 
 ```kotlin [flatMap]
 val arbAge = Arb.int(0..100)
@@ -265,8 +267,6 @@ val arbPerson = arbAge.flatMap {
   }
 }
 ```
-
-</v-click>
 
 ---
 
@@ -606,6 +606,7 @@ image: /pbt-frameworks.png
 - JVM: [jqwik](https://jqwik.net/)
 - Kotlin: [kotest property](https://kotest.io/docs/proptest/property-based-testing.html)
 - .NET: [FsCheck](https://fscheck.github.io/FsCheck/)
+- C++: [RapidCheck](https://github.com/emil-e/rapidcheck)
 
 ... Just search PBT + $LANGUAGE for more!
 
