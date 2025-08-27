@@ -48,9 +48,9 @@ it("generates fizz") {
 - easier to understand
 - many tests necessary
 - lots of duplication
+- ...solvable by parameterizing the test
 - requires lots of testing discipline
 - you will most probably miss edge cases
-- duplication solvable by parameterizing the test
 
 </v-clicks>
 
@@ -600,15 +600,23 @@ image: /pbt-frameworks.png
 
 # PBT Frameworks
 
-- Haskell: [Quick Check](https://www.cse.chalmers.se/~rjmh/QuickCheck/manual.html)
-- Python: [Hypothesis](https://hypothesis.readthedocs.io/en/latest/)
-- JS+TS: [Fast Check](https://fast-check.dev/)
-- JVM: [jqwik](https://jqwik.net/)
-- Kotlin: [kotest property](https://kotest.io/docs/proptest/property-based-testing.html)
-- .NET: [FsCheck](https://fscheck.github.io/FsCheck/)
-- C++: [RapidCheck](https://github.com/emil-e/rapidcheck)
+| Stack    | Framework                                                                                    |
+|----------|----------------------------------------------------------------------------------------------|
+| Haskell  | [Quick Check](https://www.cse.chalmers.se/~rjmh/QuickCheck/manual.html)                      |
+| Python   | [Hypothesis](https://hypothesis.readthedocs.io/en/latest/)                                   |
+| JS+TS    | [Fast Check](https://fast-check.dev/)                                                        |
+| JVM      | [jqwik](https://jqwik.net/)                                                                  |
+| .NET     | [FsCheck](https://fscheck.github.io/FsCheck/)                                                |
+| Kotlin   | [kotest property](https://kotest.io/docs/proptest/property-based-testing.html)               |
+| C++      | [RapidCheck](https://github.com/emil-e/rapidcheck)                                           |
 
 ... Just search PBT + $LANGUAGE for more!
+
+<style>
+  td, th {
+   @apply py-1;
+ }
+</style>
 
 ---
 class: text-2xl
