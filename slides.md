@@ -277,8 +277,8 @@ val arbPerson = arbAge.flatMap {
 ```kotlin [Applicative]
 val arbPerson = Arb.bind(
   Arb.int(0..100),
-  Arb.string()
-) { name, age -> Person(name, age) }
+  Arb.string(),
+) { age, name -> Person(age, name) }
 ```
 
 </v-click>
