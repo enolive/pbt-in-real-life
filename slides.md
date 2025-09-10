@@ -336,7 +336,7 @@ val distinctDates = Arb.pair(Arb.localDate(), Arb.localDate())
 </v-click>
 
 ---
-class: loose-list text-2xl
+class: loose-list text-2xl fade
 ---
 
 # Favor preconditions
