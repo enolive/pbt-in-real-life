@@ -25,6 +25,43 @@ layout: cover
 # Motivation
 
 ---
+layout: fact
+---
+
+When only writing example tests, you will most probably miss edge cases 🤞
+
+<style>
+p {
+  @apply line-height-relaxed;
+}
+</style>
+
+---
+
+# Can you spot the error?
+
+```kotlin [Implementation] {all|3}
+fun pickColor(userName: String, palette: List<Color>): Color {
+  val hashCode = userName.hashCode()
+  val whichColor = hashCode % palette.size
+  return palette[whichColor]
+}
+
+```
+
+```kotlin [Example Test]
+it("color is from the palette") {
+  withData("Chris", "Olli", "Maggo") { userName -> 
+    val palette = listOf(RED, GREEN, BLUE)
+
+    val result = pickColor(userName, palette)
+
+    palette.shouldContain(result)
+  }
+}
+```
+
+---
 layout: two-cols-header
 class: fade
 ---
@@ -50,7 +87,6 @@ it("generates fizz") {
 - lots of duplication
 - ...solvable by parameterizing the test
 - requires lots of testing discipline
-- you will most probably miss edge cases
 
 </v-clicks>
 
@@ -96,9 +132,9 @@ class: fade
 <v-clicks>
 
 - numbers divisible by 5 produce Buzz
-- result is never empty
 - pattern repeats every 15 numbers
 - every sequence of 3 numbers contains a Fizz
+- result is never empty
 - function works for any possible number
 
 </v-clicks>
@@ -244,33 +280,7 @@ val arbList = Arb.list(0..100, Arb.double())
 
 ---
 
-# Map
-
-```kotlin [map like on lists] {1-2|4|all}
-val arbNames = Arb.list(0..100, Arb.string())
-val arbUniqueNames = arbNames.map { it.distinct() }
-
-val arbNumbersThatMightBeDivisibleBy3 = Arb.int().map { it * 3 }
-```
-
----
-
-# FlatMap
-
-```kotlin [flatMap]
-val arbAge = Arb.int(0..100)
-val arbName = Arb.string()
-
-val arbPerson = arbAge.flatMap { 
-  age -> arbName.map { 
-    name -> Person(name, age)
-  }
-}
-```
-
----
-
-# Better ways for building complex types
+# Combining complex types
 
 <v-click>
 
@@ -348,54 +358,6 @@ checkAll(Arb.localDate(), Arb.localDate()) { first, second ->
 </v-clicks>
 
 ---
-class: loose-list
----
-
-# Reflection
-
-```kotlin
-// let the framework do everything
-val arbPerson = Arb.bind<Person>()
-```
-
-<v-click>
-
-- ⚠️ limited support between languages & ecosystems
-- ⚠️ slow, especially in lists
-
-</v-click>
-
----
-
-# Unions
-
-<v-click>
-
-```kotlin [mix-in nulls]
-val arbMaybeId = Arb.uuid().orNull()
-```
-</v-click>
-
-<v-click>
-
-```kotlin [combine two arbitraries]
-val arbNumbers = Arb.int(1..10).merge(Arb.int(100..150))
-```
-</v-click>
-
-<v-click>
-
-```kotlin [union types]
-// Cat and Dog are both subtypes of Pet
-val arbCat = Arb.bind<Cat>()
-val arbDog = Arb.bind<Dog>()
-
-val arbPet = arbCat.merge(arbDog)
-```
-
-</v-click>
-
----
 
 # Statistics
 
@@ -452,6 +414,20 @@ class: text-2xl loose-list
 - 💣 nasty modulo operation failure for negative hash values
 
 ---
+
+```kotlin
+it("color is from the palette") {
+  checkAll(Arb.string()) { name ->
+    val palette = listOf(RED, GREEN, BLUE)
+
+    val result = pickColor(name, palette)
+
+    palette.shouldContain(result)
+  }
+}
+```
+
+---
 class: text-2xl loose-list
 ---
 
@@ -461,6 +437,21 @@ class: text-2xl loose-list
 - 💡 more recent values are weighted higher than older ones
 - 💡 used to calculate the probable value of a forcasted payment
 - 💣 sum to Infinity bug in the function!
+
+---
+
+```kotlin
+it("average is in the expected range") {
+  checkAll(Arb.list(gen = Arb.double(), range = 1..100)) { numbers ->
+    val min = numbers.min()
+    val max = numbers.max()
+
+    val result = ewma(numbers)
+
+    result.shouldBeBetween(min, max, 0.0)
+  }
+}
+```
 
 ---
 class: text-2xl loose-list
@@ -473,6 +464,20 @@ class: text-2xl loose-list
 - 💣 off-by-one error when stars align
 
 ---
+
+```kotlin
+it("recurring payments is inside the boundaries defined by the plan") {
+  checkAll(arbPlan) { plan ->
+    val payments = derivePaymentsFromPlan(plan)
+
+    payments.forAll {
+      it.date.shouldBeBetween(plan.start, plan.end)
+    }
+  }
+}
+```
+
+---
 class: text-2xl loose-list
 ---
 
@@ -482,6 +487,20 @@ class: text-2xl loose-list
 - 💡 excluding weekends and German holidays
 - 💡 using fixed dates and the [Gauss' Easter Algorithm](https://en.wikipedia.org/wiki/Date_of_Easter#Gauss's_Easter_algorithm)
 - 💣 detected the whole thing was too slow to be feasible
+
+---
+
+```kotlin
+it("between all date ranges, the number of work days is positive") {
+  checkAll(Arb.localDate(), Arb.localDate()) { start, end ->
+    assume(start <= end)
+
+    val workDays = calculateWorkDays(start..end)
+
+    workDays.shouldBeGreaterThanOrEqual(0)
+  }
+}
+```
 
 ---
 layout: cover
@@ -635,3 +654,83 @@ class: text-2xl
 ---
 src: ./thanks.md
 ---
+
+---
+layout: cover
+---
+
+# Extra Operations with Arbitraries
+
+---
+
+# Map
+
+```kotlin [map like on lists] {1-2|4|all}
+val arbNames = Arb.list(0..100, Arb.string())
+val arbUniqueNames = arbNames.map { it.distinct() }
+
+val arbNumbersThatMightBeDivisibleBy3 = Arb.int().map { it * 3 }
+```
+
+---
+
+# FlatMap
+
+```kotlin [flatMap]
+val arbAge = Arb.int(0..100)
+val arbName = Arb.string()
+
+val arbPerson = arbAge.flatMap { 
+  age -> arbName.map { 
+    name -> Person(name, age)
+  }
+}
+```
+
+---
+class: loose-list
+---
+
+# Reflection
+
+```kotlin
+// let the framework do everything
+val arbPerson = Arb.bind<Person>()
+```
+
+<v-click>
+
+- ⚠️ limited support between languages & ecosystems
+- ⚠️ slow, especially in lists
+
+</v-click>
+
+---
+
+# Unions
+
+<v-click>
+
+```kotlin [mix-in nulls]
+val arbMaybeId = Arb.uuid().orNull()
+```
+</v-click>
+
+<v-click>
+
+```kotlin [combine two arbitraries]
+val arbNumbers = Arb.int(1..10).merge(Arb.int(100..150))
+```
+</v-click>
+
+<v-click>
+
+```kotlin [union types]
+// Cat and Dog are both subtypes of Pet
+val arbCat = Arb.bind<Cat>()
+val arbDog = Arb.bind<Dog>()
+
+val arbPet = arbCat.merge(arbDog)
+```
+
+</v-click>
