@@ -28,7 +28,7 @@ layout: cover
 layout: fact
 ---
 
-When only writing example tests, you will most probably miss edge cases 🤞
+Example tests often miss edge cases 🤞
 
 <style>
 p {
@@ -161,9 +161,14 @@ class: fade
 layout: fact
 ---
 
-- Tests are **hypotheses** about the correctness of the code.
-- Therefore, they **cannot be proven**, only **falsified**.
-- Finding a good, **falsifiable** hypothesis is the hard thing!
+Tests are **hypotheses** about the correctness of the code.
+Therefore, they **cannot be proven**, only **falsified**.
+
+<style>
+  p {
+    @apply leading-relaxed;
+  }
+</style>
 
 ---
 layout: cover
@@ -177,11 +182,12 @@ class: text-3xl fade
 
 <v-clicks>
 
-- each property executed many times with random-ish data
+- each property executed many times
+- using random-ish data
 - on failure
-- display used input
-- try to find a simpler example, via [Shrinking](https://kotest.io/docs/proptest/property-test-shrinking.html)
-- display deterministic seed for reproduction
+  - display used input
+  - use [Shrinking](https://kotest.io/docs/proptest/property-test-shrinking.html)
+  - display deterministic seed for reproduction
 
 </v-clicks>
 
@@ -279,23 +285,41 @@ val arbList = Arb.list(0..100, Arb.double())
 ```
 
 ---
+layout: cover
+---
 
 # Combining complex types
 
-<v-click>
+---
 
-```kotlin [Applicative]
+# Applicative
+
+```kotlin
 val arbPerson = Arb.bind(
   Arb.int(0..100),
   Arb.string(),
 ) { age, name -> Person(age, name) }
 ```
+---
 
-</v-click>
+# FlatMap
 
-<v-click>
+```kotlin
+val arbAge = Arb.int(0..100)
+val arbName = Arb.string()
 
-```kotlin [Pseudo-Imperative]
+val arbPerson = arbAge.flatMap { 
+  age -> arbName.map { 
+    name -> Person(name, age)
+  }
+}
+```
+
+---
+
+## Pseudo-Imperative
+
+```kotlin
 val arbPerson = arbitrary {
   val age = Arb.int(0..100).bind()
   val name = Arb.string().bind()
@@ -304,13 +328,13 @@ val arbPerson = arbitrary {
 }
 ```
 
-</v-click>
+---
+class: text-3xl
+---
 
-<v-click>
-
-...Arbitraries are [monads](https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) 😜
-
-</v-click>
+- Superior shrinking with Applicatives
+- Best Readability with Imperative style
+- Arbitraries are [Monads](https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) 😜
 
 ---
 class: text-2xl
@@ -670,21 +694,6 @@ val arbNames = Arb.list(0..100, Arb.string())
 val arbUniqueNames = arbNames.map { it.distinct() }
 
 val arbNumbersThatMightBeDivisibleBy3 = Arb.int().map { it * 3 }
-```
-
----
-
-# FlatMap
-
-```kotlin [flatMap]
-val arbAge = Arb.int(0..100)
-val arbName = Arb.string()
-
-val arbPerson = arbAge.flatMap { 
-  age -> arbName.map { 
-    name -> Person(name, age)
-  }
-}
 ```
 
 ---
