@@ -2,6 +2,6 @@
   @apply list-none;
 
   li {
-    @apply ml-0 line-height-loose;
+    @apply ml-0 line-height-relaxed;
   }
 }
