@@ -334,7 +334,7 @@ class: text-3xl
 
 - Superior shrinking with Applicatives
 - Best Readability with Imperative style
-- Arbitraries are [Monads](https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) 😜
+- Arbitraries are (almost) [Monads](https://www.adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html) 😜
 
 ---
 class: text-2xl
